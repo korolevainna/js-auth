@@ -5,12 +5,16 @@ class User {
     DEVELOPER: 3,
   }
 
-  static #list = [];
+  static #list = []
+  static #count = 1
 
   constructor({ email, password, role }) {
-    this.email = String(email).toLowerCase();
-    this.password = password
+    this.id = User.#count++
+
+    this.email = String(email).toLowerCase()
+    this.password = String(password)
     this.role = User.#converRole(role)
+    this.isConfirm = false
   }
 
   static #converRole = (role) => {
@@ -33,6 +37,8 @@ class User {
     this.#list.push(user)
 
     console.log(this.#list)
+
+    return user
   }
 
   static getByEmail(email) {
